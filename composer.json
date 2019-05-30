@@ -1,0 +1,17 @@
+{
+    "name": "temperworks/laravel-optimizely",
+    "require": {
+        "optimizely/optimizely-sdk": "^3.1"
+    },
+    "authors": [
+        {
+            "name": "Jeroen",
+            "email": "jeroen@joche.ms"
+        }
+    ],
+    "autoload": {
+                "psr-4" : {
+                    "TemperWorks\\LaravelOptimizely" : "src"
+                }
+            }
+}

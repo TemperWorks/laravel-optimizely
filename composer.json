@@ -3,15 +3,19 @@
     "require": {
         "optimizely/optimizely-sdk": "^3.1"
     },
-    "authors": [
-        {
-            "name": "Jeroen",
-            "email": "jeroen@joche.ms"
-        }
-    ],
     "autoload": {
-                "psr-4" : {
-                    "TemperWorks\\LaravelOptimizely\\" : "src"
-                }
-            }
+        "psr-4" : {
+            "TemperWorks\\LaravelOptimizely\\" : "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "TemperWorks\\LaravelOptimizely\\ServiceProvider"
+      ],
+      "aliases": {
+        "Debugbar": "Barryvdh\\Debugbar\\Facade"
+      }
+    }
+  },
 }

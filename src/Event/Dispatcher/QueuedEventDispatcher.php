@@ -1,4 +1,4 @@
-<?php namespace TemperWorks\Event\Dispatcher;
+<?php namespace TemperWorks\LaravelOptimizely\Event\Dispatcher;
 
 use Optimizely\Event\Dispatcher;
 use Optimizely\Event\LogEvent;

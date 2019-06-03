@@ -1,7 +1,6 @@
 <?php namespace TemperWorks\LaravelOptimizely;
 
 use Cache;
-use DateInterval;
 use Optimizely\Optimizely;
 use TemperWorks\LaravelOptimizely\Event\Dispatcher\QueuedEventDispatcher;
 

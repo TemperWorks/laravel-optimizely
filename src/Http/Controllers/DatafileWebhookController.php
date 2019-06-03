@@ -1,12 +1,11 @@
 <?php namespace TemperWorks\LaravelOptimizely\Http\Controllers;
 
-use Illuminate\Http\Request;
-use TemperWorks\LaravelOptimizely\Jobs\LoadDataFile;
+use TemperWorks\LaravelOptimizely\Datafile;
 
 class DatafileWebhookController
 {
-    public function post(Request $request)
+    public function post()
     {
-        dispatch(new LoadDataFile($request->get('data.origin_url')));
+        app()->make(Datafile::class)->get(true);
     }
 }

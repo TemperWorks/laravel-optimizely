@@ -21,16 +21,20 @@ class OptimizelyWrapper
 
     public function getVariant(string $experiment, string $userID)
     {
-        $cacheKey = md5($this->datafile->get()) . $experiment . $userID;
+        $cacheKey = 'activate' . $experiment . $userID . md5($this->datafile->get());
 
         if (!Cache::has($cacheKey))
         {
             $variant = $this->optimizely()->activate($experiment, $userID);
-            Cache::rememberForever($cacheKey, $variant);
+            Cache::forever($cacheKey, $variant);
         }
 
         return $variant ?? Cache::get($cacheKey);
     }
 
+    public function track($event, $userID, $params = [])
+    {
+        return $this->optimizely()->track($event, $userID, $params);
+    }
 
 }

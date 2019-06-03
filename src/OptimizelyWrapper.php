@@ -26,7 +26,7 @@ class OptimizelyWrapper
         if (!Cache::has($cacheKey))
         {
             $variant = $this->optimizely()->activate($experiment, $userID);
-            Cache::put($cacheKey, $variant, new DateInterval("P1D"));
+            Cache::rememberForever($cacheKey, $variant);
         }
 
         return $variant ?? Cache::get($cacheKey);

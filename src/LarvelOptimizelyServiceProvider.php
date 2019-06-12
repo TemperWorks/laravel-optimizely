@@ -1,5 +1,8 @@
 <?php namespace TemperWorks\LaravelOptimizely;
 
+use Optimizely\Optimizely;
+use TemperWorks\LaravelOptimizely\Event\Dispatcher\QueuedEventDispatcher;
+
 class LarvelOptimizelyServiceProvider extends \Illuminate\Support\ServiceProvider
 {
     public function boot()
@@ -8,6 +11,10 @@ class LarvelOptimizelyServiceProvider extends \Illuminate\Support\ServiceProvide
 
         $this->app->bind('laravel-optimizely', function(){
             return app()->make(OptimizelyWrapper::class, [app()->make(Datafile::class)]);
+        });
+
+        $this->app->bind(Optimizely::class, function() {
+            return new Optimizely(app()->make(Datafile::class)->get(), app()->make(QueuedEventDispatcher::class));
         });
     }
 }

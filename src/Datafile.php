@@ -10,10 +10,12 @@ class Datafile
     {
         if ($overrideCache || !Cache::has(self::CACHEKEY))
         {
-            $fileContent = file_get_contents('https://cdn.optimizely.com/datafiles/'.env('OPTIMIZELY_SDK_KEY').'.json');
+            $fileContent = app()->make(DataFileCdnLoader::class)->get();
+
             Cache::forever(self::CACHEKEY, $fileContent);
         }
 
         return $fileContent ?? Cache::get(self::CACHEKEY);
     }
+
 }

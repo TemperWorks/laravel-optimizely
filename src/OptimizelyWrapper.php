@@ -7,25 +7,27 @@ use TemperWorks\LaravelOptimizely\Event\Dispatcher\QueuedEventDispatcher;
 class OptimizelyWrapper
 {
     private $datafile;
+    private $optimizely;
 
-    public function __construct(Datafile $datafile)
+    public function __construct()
     {
-        $this->datafile = $datafile;
+        $this->datafile = app()->make(Datafile::class)->get();
+        $this->optimizely = app()->make(Optimizely::class);
     }
 
-    private function optimizely()
+    public function isFeatureEnabled(string $experiment, string $userID, $params = []) : bool
     {
-        return app()->make(Optimizely::class, ['datafile' => $this->datafile->get(), 'eventDispatcher' => app()->make(QueuedEventDispatcher::class)]);
-    }
-
-    public function getVariant(string $experiment, string $userID)
-    {
-        $cacheKey = 'activate' . $experiment . $userID . md5($this->datafile->get());
+        $cacheKey = 'isFeatureEnabled-' . $experiment . $userID . md5(json_encode($params)) . md5($this->datafile);
 
         if (!Cache::has($cacheKey))
         {
-            $variant = $this->optimizely()->activate($experiment, $userID);
+            $variant = $this->optimizely->isFeatureEnabled($experiment, $userID, $params);
+
             Cache::forever($cacheKey, $variant);
+        }
+        else
+        {
+            print "from cache";
         }
 
         return $variant ?? Cache::get($cacheKey);
@@ -33,7 +35,7 @@ class OptimizelyWrapper
 
     public function track($event, $userID, $params = [])
     {
-        return $this->optimizely()->track($event, $userID, $params);
+        return $this->optimizely->track($event, $userID, $params);
     }
 
 }

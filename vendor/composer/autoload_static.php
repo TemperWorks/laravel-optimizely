@@ -16,7 +16,7 @@ class ComposerStaticInitfe51463bd243e8b4ada70cf70f142d85
     public static $prefixDirsPsr4 = array (
         'TemperWorks\\LaravelOptimizely\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/src',
+            0 => '/src',
         ),
     );
 

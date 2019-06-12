@@ -6,5 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'TemperWorks\\LaravelOptimizely\\' => array($baseDir . '/src'),
+    'TemperWorks\\LaravelOptimizely\\' => array('/src'),
 );

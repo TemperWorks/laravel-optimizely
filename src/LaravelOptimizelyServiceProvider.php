@@ -3,7 +3,7 @@
 use Optimizely\Optimizely;
 use TemperWorks\LaravelOptimizely\Event\Dispatcher\QueuedEventDispatcher;
 
-class LarvelOptimizelyServiceProvider extends \Illuminate\Support\ServiceProvider
+class LaravelOptimizelyServiceProvider extends \Illuminate\Support\ServiceProvider
 {
     public function boot()
     {

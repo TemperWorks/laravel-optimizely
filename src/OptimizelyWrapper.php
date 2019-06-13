@@ -2,7 +2,6 @@
 
 use Cache;
 use Optimizely\Optimizely;
-use TemperWorks\LaravelOptimizely\Event\Dispatcher\QueuedEventDispatcher;
 
 class OptimizelyWrapper
 {

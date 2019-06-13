@@ -11,7 +11,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "TemperWorks\\LaravelOptimizely\\ServiceProvider"
+                "TemperWorks\\LaravelOptimizely\\LaravelOptimizelyServiceProvider"
       ],
       "aliases": {
         "Debugbar": "Barryvdh\\Debugbar\\Facade"

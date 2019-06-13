@@ -7,6 +7,8 @@ class LaravelOptimizelyServiceProvider extends \Illuminate\Support\ServiceProvid
 {
     public function boot()
     {
+        $this->publishes([__DIR__.'/config.php' => config_path('laravel-optimizely.php')], 'config');
+
         $this->loadRoutesFrom(__DIR__.'/routes.php');
 
         $this->app->bind('laravel-optimizely', function(){

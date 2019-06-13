@@ -26,6 +26,6 @@ class TrackEvent implements ShouldQueue
 
     public function handle()
     {
-        Optimizely::track($event, $userID, $params);
+        Optimizely::track($this->event, $this->userID, $this->params);
     }
 }

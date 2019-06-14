@@ -24,10 +24,6 @@ class OptimizelyWrapper
 
             Cache::forever($cacheKey, $variant);
         }
-        else
-        {
-            print "from cache";
-        }
 
         return $variant ?? Cache::get($cacheKey);
     }

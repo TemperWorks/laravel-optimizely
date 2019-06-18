@@ -8,6 +8,6 @@ class QueuedEventDispatcher implements Dispatcher\EventDispatcherInterface
 {
     public function dispatchEvent(LogEvent $event)
     {
-        dispatch(new DispatchEvent($event));
+        dispatch(new DispatchEvent($event))->onQueue(config("laravel-optimizely.queue"));
     }
 }

@@ -1,21 +1,32 @@
 <?php namespace TemperWorks\LaravelOptimizely\Jobs;
 
+use Illuminate\Bus\Queueable;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Optimizely;
 use TemperWorks\LaravelOptimizely\OptimizelyWrapper;
 
 class TrackEvent implements ShouldQueue
 {
-    public $event;
-    public $user;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public function __construct($event, $user)
+    protected $event;
+    protected $userID;
+    protected $params;
+
+    const APPLIED_TO_SHIFTS = "applied to shifts";
+
+    public function __construct($event, $userID, $params=[])
     {
         $this->event = $event;
-        $this->user = $user;
+        $this->userID = $userID;
+        $this->params = $params;
     }
 
     public function handle()
     {
-        app()->make(OptimizelyWrapper::class)->track($event, $user);
+        app()->make(OptimizelyWrapper::class)->track($this->event, $this->userID, $this->params);
     }
 }

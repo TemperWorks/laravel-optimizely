@@ -8,14 +8,11 @@ class OptimizelyWrapper
     private $datafile;
     private $optimizely;
 
-    public function __construct()
+    public function isFeatureEnabled(string $experiment, string $userID, $params = []) : bool
     {
         $this->datafile = app()->make(Datafile::class)->get();
         $this->optimizely = app()->make(Optimizely::class);
-    }
 
-    public function isFeatureEnabled(string $experiment, string $userID, $params = []) : bool
-    {
         $cacheKey = 'isFeatureEnabled-' . $experiment . $userID . md5(json_encode($params)) . md5($this->datafile);
 
         if (!Cache::has($cacheKey))
@@ -30,6 +27,7 @@ class OptimizelyWrapper
 
     public function track($event, $userID, $params = [])
     {
+        $this->optimizely = app()->make(Optimizely::class);
         return $this->optimizely->track($event, $userID, $params);
     }
 

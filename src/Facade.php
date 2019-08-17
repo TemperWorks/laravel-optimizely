@@ -1,4 +1,4 @@
-<?php namespace TemperWorks\LaravelOptimizely\Facade;
+<?php namespace TemperWorks\LaravelOptimizely;
 
 use Illuminate\Support\Facades\Facade as BaseFacade;
 

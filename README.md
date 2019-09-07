@@ -12,8 +12,8 @@ use Optimizely
 
 ...
 
-$variant = Optimizely->activate($experimentName, Auth::user()->getRouteKey(), $params);
+$variant = Optimizely::activate($experimentName, Auth::user()->getRouteKey(), $params);
 ---- OR
-$isFeatureEnabled = Optimizely->isFeatureEnabled($experimentName, Auth::user()->getRouteKey(), $params);
+$isFeatureEnabled = Optimizely::isFeatureEnabled($experimentName, Auth::user()->getRouteKey(), $params);
 
 ```

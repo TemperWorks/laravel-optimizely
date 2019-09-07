@@ -45,12 +45,7 @@ class OptimizelyWrapper
 
         if (!Cache::has($cacheKey))
         {
-            if ($type === self::TYPE_IS_FEATURE_ENABLED) {
-                $variant = $this->optimizely->isFeatureEnabled($experiment, $userID, $params);
-            } else if($type === self::TYPE_ACTIVATE) {
-                $variant = $this->optimizely->activate($experiment, $userID, $params);
-            }
-
+            $variant = $this->optimizely->$type($experiment, $userID, $params);
             Cache::forever($cacheKey, $variant);
         }
 

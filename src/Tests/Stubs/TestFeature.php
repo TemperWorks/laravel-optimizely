@@ -30,4 +30,11 @@ class TestFeature extends AbstractFeature implements FeatureContract {
             'foo' => 'bar'
         ];
     }
+
+    public function getAudiences() : array
+    {
+        return [
+            TestAudience::class
+        ];
+    }
 }

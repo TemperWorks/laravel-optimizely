@@ -13,7 +13,7 @@ class FeatureTest extends \BrowserKitTest
     {
         $feature = new TestFeature(2);
 
-        $this->assertEquals('text_experiment', $feature->getExperiment());
+        $this->assertEquals('test_experiment', $feature->getExperiment());
         $this->assertEquals(2, $feature->getIdentifier());
         $this->assertEquals([TestAudience::class], $feature->getAudiences());
         $this->assertEquals(['foo' => 'bar'], $feature->getAttributes());
@@ -24,14 +24,14 @@ class FeatureTest extends \BrowserKitTest
         $feature = new TestFeature(1);
 
         $this->assertEquals([
-            'is_odd' => true,
+            'is_even' => false,
             'foo' => 'bar',
         ], $feature->getParams());
 
         $feature = new TestFeature(2);
 
         $this->assertEquals([
-            'is_odd' => true,
+            'is_even' => true,
             'foo' => 'bar',
         ], $feature->getParams());
     }
@@ -39,9 +39,7 @@ class FeatureTest extends \BrowserKitTest
     public function test_isEnabled_should_call_optimizely()
     {
         $mock = \Mockery::mock(OptimizelyWrapper::class);
-        $mock->shouldReceive('isFeatureEnabled')->with(
-            new TestFeature(2)
-        );
+        $mock->shouldReceive('isFeatureEnabled')->with(\Hamcrest\Core\IsEqual::equalTo(new TestFeature(2)));
 
         $this->app->instance(OptimizelyWrapper::class, $mock);
 

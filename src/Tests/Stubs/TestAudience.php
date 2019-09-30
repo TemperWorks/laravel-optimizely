@@ -1,6 +1,6 @@
 <?php
 
-namespace TemperWorks\LaravelOptimizely\Tests\Stubs
+namespace TemperWorks\LaravelOptimizely\Tests\Stubs;
 
 use TemperWorks\LaravelOptimizely\Contracts\AudienceContract;
 use TemperWorks\LaravelOptimizely\Contracts\FeatureContract;
@@ -17,7 +17,7 @@ class TestAudience implements AudienceContract{
     public function getAttributes()
     {
         return [
-            'is_odd' => $this->feature->getIdentifier() % 2 === 0
+            'is_even' => $this->feature->getIdentifier() % 2 === 0
         ];
     }
 }

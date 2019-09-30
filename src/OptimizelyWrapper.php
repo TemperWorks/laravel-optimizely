@@ -2,6 +2,7 @@
 
 use Cache;
 use Optimizely\Optimizely;
+use TemperWorks\LaravelOptimizely\Contracts\FeatureContract;
 
 class OptimizelyWrapper
 {
@@ -11,14 +12,22 @@ class OptimizelyWrapper
     private $datafile;
     private $optimizely;
 
-    public function isFeatureEnabled(string $experiment, string $userID, $params = []) : bool
+    public function isFeatureEnabled(FeatureContract $feature) : bool
     {
-        return $this->cacheOptimizelyResponse($experiment, $userID, $params, self::TYPE_IS_FEATURE_ENABLED) ?? false;
+        return $this->cacheOptimizelyResponse(
+            $feature->getExperiment(), 
+            $feature->getIdentifier(), 
+            $feature->getParams(), 
+            self::TYPE_IS_FEATURE_ENABLED) ?? false;
     }
 
-    public function activate(string $experiment, string $userID, $params = []) : ?string
+    public function activate(FeatureContract $feature) : ?string
     {
-        return $this->cacheOptimizelyResponse($experiment, $userID, $params, self::TYPE_ACTIVATE);
+        return $this->cacheOptimizelyResponse(
+            $feature->getExperiment(), 
+            $feature->getIdentifier(), 
+            $feature->getParams(), 
+            self::TYPE_ACTIVATE);
     }
 
     public function track($event, $userID, $params = [])

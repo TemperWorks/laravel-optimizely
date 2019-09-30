@@ -5,6 +5,7 @@ use Mockery;
 use Optimizely\Optimizely;
 use TemperWorks\LaravelOptimizely\Datafile;
 use TemperWorks\LaravelOptimizely\OptimizelyWrapper;
+use TemperWorks\LaravelOptimizely\Tests\Stubs\TestFeature;
 
 class OptimizelyWrapperTest extends \BrowserKitTest
 {
@@ -21,7 +22,7 @@ class OptimizelyWrapperTest extends \BrowserKitTest
         Cache::shouldReceive("has")->andReturn(false);
         Cache::shouldReceive("forever");
 
-        $this->app->make(OptimizelyWrapper::class)->isFeatureEnabled("experiment", "aaaaa");
+        $this->app->make(OptimizelyWrapper::class)->isFeatureEnabled(new TestFeature(123));
     }
 
     public function test_isFeatureEnabled_doesnt_call_optimizely_twice()
@@ -37,6 +38,6 @@ class OptimizelyWrapperTest extends \BrowserKitTest
         Cache::shouldReceive("has")->once()->andReturn(true);
         Cache::shouldReceive("get")->once()->andReturn(true);
 
-        $this->app->make(OptimizelyWrapper::class)->isFeatureEnabled("experiment", "aaaaa");
+        $this->app->make(OptimizelyWrapper::class)->isFeatureEnabled(new TestFeature(123));
     }
 }

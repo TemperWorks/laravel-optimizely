@@ -15,7 +15,8 @@ class FeatureTest extends \BrowserKitTest
 
         $this->assertEquals('test_experiment', $feature->getExperiment());
         $this->assertEquals(2, $feature->getIdentifier());
-        $this->assertEquals([TestAudience::class], $feature->getAudiences());
+        $this->assertIsArray($feature->getAudiences());
+        $this->assertInstanceOf(TestAudience::class, $feature->getAudiences()[0]);
         $this->assertEquals(['foo' => 'bar'], $feature->getAttributes());
     }
 

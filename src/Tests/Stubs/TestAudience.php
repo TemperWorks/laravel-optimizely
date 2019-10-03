@@ -3,21 +3,20 @@
 namespace TemperWorks\LaravelOptimizely\Tests\Stubs;
 
 use TemperWorks\LaravelOptimizely\Contracts\AudienceContract;
-use TemperWorks\LaravelOptimizely\Contracts\FeatureContract;
 
 class TestAudience implements AudienceContract{
 
-    protected $feature;
+    protected $id;
 
-    public function __construct(FeatureContract  $feature)
+    public function __construct(int $id)
     {
-        $this->feature = $feature;
+        $this->id = $id;
     }
 
-    public function getAttributes()
+    public function getAttributes() : array
     {
         return [
-            'is_even' => $this->feature->getIdentifier() % 2 === 0
+            'is_even' => $this->id % 2 === 0
         ];
     }
 }

@@ -3,16 +3,19 @@
 namespace  TemperWorks\LaravelOptimizely\Features;
 
 
+use TemperWorks\LaravelOptimizely\Contracts\AudienceContract;
+use TemperWorks\LaravelOptimizely\Contracts\FeatureContract;
 use TemperWorks\LaravelOptimizely\OptimizelyWrapper;
 
-abstract class AbstractFeature
+abstract class AbstractFeature implements FeatureContract
 {
     public function getParams() : array
     {
         $params = $this->getAttributes();
-        $audiences = collect($this->getAudiences())->map(function ($audience) {
-            return (new $audience($this))->getAttributes();
-        });
+        $audiences = collect($this->getAudiences())
+            ->map(function (AudienceContract $audience) {
+                return $audience->getAttributes();
+            });
 
 
         return $audiences->collapse()->merge($params)->toArray();

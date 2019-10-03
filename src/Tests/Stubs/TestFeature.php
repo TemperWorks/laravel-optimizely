@@ -2,10 +2,9 @@
 
 namespace TemperWorks\LaravelOptimizely\Tests\Stubs;
 
-use TemperWorks\LaravelOptimizely\Contracts\FeatureContract;
 use TemperWorks\LaravelOptimizely\Features\AbstractFeature;
 
-class TestFeature extends AbstractFeature implements FeatureContract {
+class TestFeature extends AbstractFeature {
 
     public $id;
 
@@ -21,7 +20,7 @@ class TestFeature extends AbstractFeature implements FeatureContract {
 
     public function getIdentifier() : string
     {
-        return $this->id;
+        return (string) $this->id;
     }
 
     public function getAttributes() : array
@@ -34,7 +33,7 @@ class TestFeature extends AbstractFeature implements FeatureContract {
     public function getAudiences() : array
     {
         return [
-            TestAudience::class
+            new TestAudience($this->id)
         ];
     }
 }

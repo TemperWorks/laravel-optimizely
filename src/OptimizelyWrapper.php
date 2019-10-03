@@ -21,10 +21,10 @@ class OptimizelyWrapper
         return $this->cacheOptimizelyResponse($experiment, $userID, $params, self::TYPE_ACTIVATE);
     }
 
-    public function track($event, $userID, $params = [])
+    public function track($event, $userID, $attributes = null, $eventTags = null)
     {
         $this->optimizely = app()->make(Optimizely::class);
-        return $this->optimizely->track($event, $userID, $params);
+        return $this->optimizely->track($event, $userID, $attributes, $eventTags);
     }
 
     /**

@@ -46,4 +46,14 @@ class FeatureTest extends \BrowserKitTest
 
         TestFeature::isEnabled(2);
     }
+
+    public function test_activate_should_call_optimizely()
+    {
+        $mock = \Mockery::mock(OptimizelyWrapper::class);
+        $mock->shouldReceive('activate')->with(\Hamcrest\Core\IsEqual::equalTo(new TestFeature(2)));
+
+        $this->app->instance(OptimizelyWrapper::class, $mock);
+
+        TestFeature::activate(2);
+    }
 }

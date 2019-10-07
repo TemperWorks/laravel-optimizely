@@ -8,7 +8,7 @@ use TemperWorks\LaravelOptimizely\Contracts\FeatureContract;
 
 abstract class AbstractFeature implements FeatureContract
 {
-    public function getParams() : array
+    final public function getParams() : array
     {
         $params = $this->getAttributes();
         $audiences = collect($this->getAudiences())
@@ -37,5 +37,10 @@ abstract class AbstractFeature implements FeatureContract
     public static function isEnabled()
     {
         return app()->make('laravel-optimizely')->isFeatureEnabled(new static(...func_get_args()));
+    }
+
+    public static function activate()
+    {
+        return app()->make('laravel-optimizely')->activate(new static(...func_get_args()));
     }
 }

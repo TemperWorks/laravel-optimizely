@@ -5,7 +5,6 @@ namespace  TemperWorks\LaravelOptimizely\Features;
 
 use TemperWorks\LaravelOptimizely\Contracts\AudienceContract;
 use TemperWorks\LaravelOptimizely\Contracts\FeatureContract;
-use TemperWorks\LaravelOptimizely\OptimizelyWrapper;
 
 abstract class AbstractFeature implements FeatureContract
 {
@@ -37,6 +36,6 @@ abstract class AbstractFeature implements FeatureContract
 
     public static function isEnabled()
     {
-        return app()->make(OptimizelyWrapper::class)->isFeatureEnabled(new static(...func_get_args()));
+        return app()->make('laravel-optimizely')->isFeatureEnabled(new static(...func_get_args()));
     }
 }

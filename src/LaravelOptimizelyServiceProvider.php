@@ -12,7 +12,7 @@ class LaravelOptimizelyServiceProvider extends \Illuminate\Support\ServiceProvid
         $this->loadRoutesFrom(__DIR__.'/routes.php');
 
         $this->app->bind('laravel-optimizely', function(){
-            return app()->make(OptimizelyWrapper::class, [app()->make(Datafile::class)]);
+            return app()->make(OptimizelyWrapper::class);
         });
 
         $this->app->bind(Optimizely::class, function() {

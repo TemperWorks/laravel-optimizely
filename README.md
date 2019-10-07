@@ -13,6 +13,7 @@ use Optimizely
 ...
 
 $variant = Optimizely::activate(new Experiment(auth()->user()));
+$variant = Experiment::activate(auth()->user());
 ---- OR
 $isFeatureEnabled = Optimizely::isFeatureEnabled(new Experiment(auth()->user());
 $isFeatureEnabled = Experiment::isEnabled(auth()->user());

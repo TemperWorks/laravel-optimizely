@@ -1,4 +1,6 @@
-<?php namespace TemperWorks\LaravelOptimizely;
+<?php
+
+namespace TemperWorks\LaravelOptimizely\Tests\Http\Controllers;
 
 use Mockery;
 

@@ -4,7 +4,7 @@
         {
             "type": "vcs",
             "url": "https://github.com/okdewit/php-sdk"
-        },
+        }
     ],
     "require": {
         "optimizely/optimizely-sdk": "^4.0"

@@ -1,4 +1,6 @@
-<?php namespace TemperWorks\LaravelOptimizely\Tests;
+<?php
+
+namespace TemperWorks\LaravelOptimizely\Tests;
 
 use Cache;
 use Mockery;
